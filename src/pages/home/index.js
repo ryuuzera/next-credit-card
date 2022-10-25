@@ -7,6 +7,7 @@ import styles from './Home.module.css';
 const physalis = '/physalis.svg';
 const chipImage = '/chip.png';
 const hokusai = '/hokusai.webp';
+const neonbg = '/neon-bg.jpg';
 
 const Homepage = () => {
   const [color, setColor] = useState('#000000');
@@ -14,15 +15,17 @@ const Homepage = () => {
   const [opacity, setOpacity] = useState(1);
   const [numbers, setNumbers] = useState([]);
   const [ownerName, setOwnerName] = useState('JOHN DOE');
+  const [orbBright, setOrbBright] = useState(0.2);
 
+  const gerarNumeros = () => {
+    const numbers = new Array();
+    for (let i = 0; i < 4; i++) {
+      numbers.push(String(Math.floor(1000 + Math.random() * 9000)).substring(0, 4));
+    }
+    setNumbers(numbers);
+  };
   useEffect(() => {
-    setNumbers([
-      ...numbers,
-      String(Math.floor(1000 + Math.random() * 9000)).substring(0, 4),
-      String(Math.floor(1000 + Math.random() * 9000)).substring(0, 4),
-      String(Math.floor(1000 + Math.random() * 9000)).substring(0, 4),
-      String(Math.floor(1000 + Math.random() * 9000)).substring(0, 4),
-    ]);
+    gerarNumeros();
   }, []);
 
   useEffect(() => {
@@ -45,46 +48,48 @@ const Homepage = () => {
         <div className={styles.Blur}></div>
         <div className={styles.ContainerCenter}>
           <div className='orb'></div>
-          <div className={styles.CardTitle}>
-            <h1>Personalize seu Suizei Card</h1>
-          </div>
           <div className={styles.CardLeft}>
-            <div className={styles.colorContainer}>
-              <label className={styles.labelColor}>Selecione a Cor:</label>
-              <input
-                className='colorPicker'
-                type='color'
-                defaultValue='#000'
-                value={color}
-                onChange={(e) => {
-                  setColor(e.target.value);
-                }}
-              />
-              <label className={styles.labelAlpha}>Transparencia:</label>
-              <Slider
-                sx={{ width: '200px' }}
-                min={0}
-                max={100}
-                defaultValue={100}
-                onChange={(e) => {
-                  setOpacity(e.target.value / 100);
-                }}
-              />{' '}
-            </div>
-            <div className={styles.ownerName}>
-              <h1>Nome do Proprietário</h1>
-              <input
-                type='text'
-                className={styles.ownerNameInput}
-                onChange={(e) => {
-                  e.target.value = e.target.value.toUpperCase();
-                  e.target.value === '' ? setOwnerName('‎') : setOwnerName(e.target.value);
-                }}
-              />
-            </div>
+              <div className={styles.colorContainer}>
+                <label className={styles.labelColor}>Selecione a Cor:</label>
+                <input
+                  className='colorPicker'
+                  type='color'
+                  defaultValue='#000'
+                  value={color}
+                  onChange={(e) => {
+                    setColor(e.target.value);
+                  }}
+                />
+                <label className={styles.labelAlpha}>Transparencia:</label>
+                <Slider
+                  sx={{ width: '355px' }}
+                  min={0}
+                  max={100}
+                  defaultValue={100}
+                  onChange={(e) => {
+                    setOpacity(e.target.value / 100);
+                  }}
+                />{' '}
+              </div>
+              <div className={styles.ownerName}>
+                <h1>Nome do Proprietário</h1>
+                <input
+                  type='text'
+                  className={styles.ownerNameInput}
+                  onChange={(e) => {
+                    e.target.value = e.target.value.toUpperCase();
+                    e.target.value === '' ? setOwnerName('‎') : setOwnerName(e.target.value);
+                  }}
+                />
+              </div>
+              <div className={styles.numberGenerator}>
+                <button onClick={() => gerarNumeros()}>Gerar Números</button>
+              </div>
           </div>
-
           <div className={styles.CardRight}>
+            <div className={styles.CardTitle}>
+              <h1>Personalize seu Suizei Card</h1>
+            </div>
             <div className={styles.CardPreview}>
               <Title
                 style={{
@@ -96,7 +101,10 @@ const Homepage = () => {
                 }}
                 className={styles.tilt}
                 options={{ speed: 10, max: 15, glare: false }}>
-                <div className='creditCard'>
+                <div
+                  className='creditCard'
+                  onMouseEnter={() => setOrbBright(0.9)}
+                  onMouseLeave={() => setOrbBright(0.2)}>
                   <div className={styles.cardTop}>
                     <div className={styles.bankName}>
                       <h1>Suizei Bank </h1>
@@ -141,7 +149,7 @@ const Homepage = () => {
       <style jsx>
         {`
           .Container {
-            background: url(${hokusai});
+            background: url(${neonbg});
             background-repeat: no-repeat;
             background-size: cover;
             height: 100vh;
@@ -191,12 +199,13 @@ const Homepage = () => {
             height: 370px;
             width: 600px;
             border-radius: 18px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             border-top: 1px solid rgba(125, 125, 125, 1);
             border-right: 1px solid rgba(125, 125, 125, 1);
             transform: translatey(0px);
             animation: float 6s ease-in-out infinite;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
           }
           .creditCard:before {
             content: '';
@@ -221,14 +230,17 @@ const Homepage = () => {
             width: 150px;
             height: 150px;
             border-radius: 50%;
+            opacity: ${orbBright};
+            transition: all 1s;
+            animation: float 20s linear infinite;
           }
           .orb:before {
             background: #ffe897;
             background: -moz-radial-gradient(top right, #ffe897, #f98a05);
             background: radial-gradient(to bottom left, #ffe897, #f98a05);
             background: -webkit-radial-gradient(top right, #ffe897, #f98a05);
-            left: 75%;
-            top: 57%;
+            left: 80%;
+            top: 60%;
           }
           .orb:after {
             animation-delay: 2.5s;
@@ -236,8 +248,8 @@ const Homepage = () => {
             background: -moz-radial-gradient(bottom right, #e0e793, #6dd0f1);
             background: radial-gradient(to top left, #e0e793, #6dd0f1);
             background: -webkit-radial-gradient(bottom right, #e0e793, #6dd0f1);
-            left: 47%;
-            top: 30%;
+            left: 44%;
+            top: 25%;
           }
           .colorPicker {
             -webkit-appearance: none;

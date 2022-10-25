@@ -1,10 +1,10 @@
-.Blur { 
+.Blur {
   position: absolute;
   z-index: -1;
-  background: rgba(8, 8, 8, 0.719); 
+  background: rgba(8, 8, 8, 0.719);
   backdrop-filter: blur(4px);
   height: 100vh;
-	width: 100vw; 
+  width: 100vw;
 }
 
 .ContainerCenter {
@@ -13,16 +13,19 @@
   flex-wrap: wrap;
   height: 80vh;
   width: 70vw;
-  background: rgba(121, 121, 121, 0.33);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.4px);
-  -webkit-backdrop-filter: blur(5.4px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .CardLeft {
   height: 100%;
-  width: 40%;
+  width: 35%;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px 0 0 16px;
 }
 
 .CardRight {
@@ -31,16 +34,17 @@
   text-align: center;
   justify-content: center;
   height: 100%;
-  width: 60%;
+  width: 65%;
 }
 
 .CardTitle {
-  color: rgba(255,240,220, 1);
-  text-align: center;
+  color: rgba(255, 240, 220, 1);
+  text-align: left;
   font-size: 1.8rem;
   font-weight: 700;
   margin: 20px;
   width: 100%;
+  margin-top: -5%;
 }
 
 .CardPreview {
@@ -164,7 +168,7 @@
 }
 
 .tilt {
-  box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .colorContainer {
@@ -174,6 +178,7 @@
   flex-wrap: wrap;
   gap: 20px;
   margin-left: 35px;
+  margin-top: 15%;
 }
 
 .colorContainer .labelColor {
@@ -188,31 +193,62 @@
   font-size: 1.3rem;
   align-items: center;
   text-align: left;
+  margin-top: 35px;
 }
 
 .ownerName {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 35px;
 }
 .ownerName h1 {
   color: white;
   font-size: 1.3rem;
-  margin: 25px 0 0 25px;
+  margin: 25px 0 0 35px;
 }
 .ownerNameInput {
   padding: 5px 5px 5px 10px;
   font-size: 1.2rem;
-  width: 350px;
+  width: 360px;
   height: 2rem;
   border-radius: 12px;
-  border: none;
-  background: rgb(194, 194, 194, 0.7);
-  margin: 15px 25px 25px;
+  border: 1px solid rgba(8, 8, 8, 0.4);
+  background: rgb(194, 194, 194, 0.2);  
+  margin: 15px 25px 25px 35px;
+  transition: all 0.4s ease;
+}
+.ownerNameInput:hover {
+  background: rgb(194, 194, 194, 0.4); 
+}
+.ownerNameInput:focus {
+  border: 2px solid rgba(8, 8, 8, 0.6);
+  outline: none;
 }
 
-.ownerNameInput:focus{
+.numberGenerator {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: flex-start;
+  margin-top: 35px;
+}
+.numberGenerator button {
+  cursor: pointer;
+  margin-left: 35px;
+  font-size: 1.2rem;
+  color: rgba(230, 216, 216, 0.884);
+  width: 250px;
+  height: 44px;
+  background: rgba(16, 64, 119, 0.563);
   border: none;
-  outline: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: all 0.6s ease-in-out;
+}
 
+.numberGenerator button:hover {
+  background: rgba(24, 87, 160, 0.863);
 }
